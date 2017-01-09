@@ -100,3 +100,34 @@ const groupAnagrams = array => {
 }
 
 groupAnagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']);
+
+
+
+//Write a hash map implementation which uses separate chaining.
+
+  //{name: null}
+  //take the key value pairs and add it to the object
+  //if there is already a value at that object, then take both old value and new value and add them to array, replace the value with that array
+  // return object
+  
+function separateChains (key, value) {
+    const object = {"name": ["Carlo", "Megan"]}; 
+    const temp = []; 
+    for (var oldKey in object) {
+      if (object[key] !== undefined && !Array.isArray(object[key])) {
+        temp.push(object[oldKey]); 
+        temp.push(value); 
+        object[oldKey] = temp; 
+        return object; 
+      }
+      else if (Array.isArray(object[key])) {
+        object[key].push(value); 
+        return object; 
+      }
+    }
+    
+   object[key] = value; 
+   return object; 
+  }
+
+separateChains("name", "Chris");
