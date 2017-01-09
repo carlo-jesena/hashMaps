@@ -62,7 +62,7 @@ HashMap.prototype._findSlot = function(key) {
   for (var i=start; i<start + this._capacity; i++) {
     var index = i % this._capacity;
     var slot = this._slots[index];
-    if (slot === undefined || slot.key === key) {
+    if (slot === undefined || slot.key === key && !slot.deleted) {
       return index;
     }
   }
@@ -77,7 +77,7 @@ HashMap.prototype._resize = function(size) {
 
   for (var i =0; i<oldSlot.length; i++) {
     var slot = oldSlot[i];
-    if (slot !== undefined) {
+    if (slot !== undefined && !slot.deleted) {
       this.set(slot.key, slot.value);
     }
   }
