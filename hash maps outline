@@ -1,0 +1,45 @@
+// Initialize function
+1) Initialize hash function with length, _slots and _deleted _capacity
+2) Set max load and size ratios
+
+// Hash string function(string)
+1) initialize hash variable to 5381
+2) loop though string
+    - set hash equal to hash shift left 5 binarys + the hash + charCodeAt index
+    - set hash equals to hash and hash
+    - return hash >>> 0
+
+// Hash get function(key)
+1) run key through _findSlot function and set to index
+2) error checking, if key doesn't exists then throw an error
+3) if key exists, return the value at that index
+
+// Hash set function(key, value)
+1) (length + deleted + 1) / capacity = load ratio
+2) if load ratio > max load, then run _resize function
+3) run _findSlot function passing in key, set to var index
+4) Set the properties to _slots[index]
+5) increase length by 1
+
+//Hash remove function (key)
+1) index is set to the result of findSlots(key)
+2) slot variable set to this._slots[index]
+3) if the slot is undefined throw error
+4) otherwise set slot.deleted to true
+5) decrement the length and increment the deleted count
+
+//Find slot function findSlot(key)
+1) hash variable set to the result of the hashString fn
+2) start variable set to hash % capacity
+3) for loop starting at i ending when i < start + this._capacity
+  - var index = i % this._capacity;
+  - var slot = this._slots[index];
+  - if the slot is undefined or has a matching key, index is valid, so return the index
+
+//resize function(size)
+1) save oldSlot to a variable
+2) set this._capacity to size
+3) reset length, deleted count to 0, slots to empty array
+4) loop through oldSlots
+  - assign slot variable to oldSlots[i]
+  - if slot is not empty(undefined), then call this.set passing in slot key and value
